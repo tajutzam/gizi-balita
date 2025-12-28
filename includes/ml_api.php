@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Helper untuk memanggil layanan ML (Python) di http://127.0.0.1:5000/predict
+ * Helper untuk memanggil layanan ML (Python) di http://103.196.155.206:8000/predict
  * Versi ini SELARAS dengan model kp_smote.py yang pakai fitur:
  *   JK, Umur, BB, TB, LILA
  */
@@ -33,32 +33,32 @@ function ml_predict_status_gizi(
     float $tinggi_badan,
     ?float $lingkar_lengan = null
 ): ?array {
-    $url = "http://127.0.0.1:5000/predict";
+    $url = "http://103.196.155.206:8000/predict";
 
     // Payload HARUS cocok dengan yang diharapkan Python:
     //   JK, Umur, BB, TB, LILA
     $payload = [
-        "JK"   => $jenis_kelamin,             // 'L' / 'P'
+        "JK" => $jenis_kelamin,             // 'L' / 'P'
         "Umur" => (string) $umur_bulan,       // boleh "24" atau "24 Bulan"
-        "BB"   => (string) $berat_badan,      // kg
-        "TB"   => (string) $tinggi_badan,     // cm
+        "BB" => (string) $berat_badan,      // kg
+        "TB" => (string) $tinggi_badan,     // cm
         "LILA" => $lingkar_lengan !== null
-                    ? (string) $lingkar_lengan
-                    : "0",
+            ? (string) $lingkar_lengan
+            : "0",
     ];
 
     $ch = curl_init();
 
     curl_setopt_array($ch, [
-        CURLOPT_URL            => $url,
+        CURLOPT_URL => $url,
         CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_POST           => true,
-        CURLOPT_HTTPHEADER     => [
+        CURLOPT_POST => true,
+        CURLOPT_HTTPHEADER => [
             'Content-Type: application/json',
             'Accept: application/json',
         ],
-        CURLOPT_POSTFIELDS     => json_encode($payload),
-        CURLOPT_TIMEOUT        => 10,
+        CURLOPT_POSTFIELDS => json_encode($payload),
+        CURLOPT_TIMEOUT => 10,
     ]);
 
     $response = curl_exec($ch);

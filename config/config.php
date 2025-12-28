@@ -1,3 +1,2 @@
 <?php
-// sesuaikan dengan nama folder project kamu di htdocs
-define('BASE_URL', '/gizi-balita-php/public');
+define('BASE_URL', '');

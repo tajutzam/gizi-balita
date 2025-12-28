@@ -234,6 +234,14 @@ def predict_status_gizi(data_input: dict):
     return class_id, class_label
 
 
+
+# ========================
+# LOAD MODEL SAAT STARTUP
+# ========================
+print("[INFO] Melatih / memuat model ...")
+MODEL, TRAIN_INFO = load_and_train_model()
+print("[INFO] Model siap.")
+
 # ========================
 # 3. FLASK API
 # ========================
@@ -268,7 +276,5 @@ def predict():
 
 
 if __name__ == "__main__":
-    print("[INFO] Melatih model ...")
-    MODEL, TRAIN_INFO = load_and_train_model()
-    print("[INFO] Model siap. Menjalankan Flask di http://127.0.0.1:5000")
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    # DEVELOPMENT ONLY
+    app.run(host="0.0.0.0", port=5000)

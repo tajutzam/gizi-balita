@@ -33,7 +33,7 @@ function ml_predict_status_gizi(
     float $tinggi_badan,
     ?float $lingkar_lengan = null
 ): ?array {
-    $url = "http://103.196.155.206:8000/predict";
+    $url = " http://103.196.155.206/api/predict";
 
     // Payload HARUS cocok dengan yang diharapkan Python:
     //   JK, Umur, BB, TB, LILA
